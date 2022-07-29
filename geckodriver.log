@@ -1,0 +1,49 @@
+1659089293795	geckodriver	INFO	Listening on 127.0.0.1:49946
+1659089296835	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49947" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofilec0tvi3"
+1659089306966	geckodriver	INFO	Listening on 127.0.0.1:49959
+1659089955269	geckodriver	INFO	Listening on 127.0.0.1:62212
+1659089958334	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62213" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofiledlIelC"
+1659089987680	geckodriver	INFO	Listening on 127.0.0.1:62248
+1659089991079	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62249" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofilemRUWuA"
+1659089992066	Marionette	INFO	Marionette enabled
+1659089992083	Marionette	INFO	Listening on port 62265
+WebDriver BiDi listening on ws://localhost:62249
+Read port: 62265
+1659089992378	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofilemRUWuA\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:62249/devtools/browser/7d48ea05-dc86-472f-9e82-aff8f62be2ce
+1659090292918	Marionette	INFO	Stopped listening on port 62265
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "62379" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofileaccrZw"
+1659090031645	Marionette	INFO	Marionette enabled
+1659090031662	Marionette	INFO	Listening on port 62395
+WebDriver BiDi listening on ws://localhost:62379
+Read port: 62395
+1659090031906	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofileaccrZw\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:62379/devtools/browser/4ace2164-9630-424f-b13a-0639e5d5f6ff
+1659090039886	Marionette	INFO	Stopped listening on port 62395
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1659090307370	geckodriver	INFO	Listening on 127.0.0.1:62546
+1659090310416	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62547" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofilerdVjwr"
+1659090311533	Marionette	INFO	Marionette enabled
+1659090311545	Marionette	INFO	Listening on port 62556
+WebDriver BiDi listening on ws://localhost:62547
+Read port: 62556
+1659090311743	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofilerdVjwr\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:62547/devtools/browser/354364fa-0ed9-4690-8bbd-032089a67391
+1659090375613	Marionette	INFO	Stopped listening on port 62556
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+console.log: "RemoteSettingsWorker error: Error: Can't import when we've started shutting down."
+1659090378038	geckodriver	INFO	Listening on 127.0.0.1:62585
+1659090381088	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62586" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofileCKiQjB"
+1659090381885	Marionette	INFO	Marionette enabled
+1659090381902	Marionette	INFO	Listening on port 62595
+WebDriver BiDi listening on ws://localhost:62586
+Read port: 62595
+1659090382133	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Ivan\\AppData\\Local\\Temp\\rust_mozprofileCKiQjB\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:62586/devtools/browser/baaa250b-22f2-4ad1-bff0-b22b60a3e04f
+1659090455735	Marionette	INFO	Stopped listening on port 62595
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
