@@ -54,9 +54,15 @@ for i in region:
         elem.click()
         server_name.append(elem.text)
     driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/div/div/div/aside/div[1]/div/div[3]/div/div[2]/button').click()
-    cur_url=str(driver.current_url)
+    cur_url=str(driver.current_url)###получает url адрес в браузере
+    print(cur_url)
+    cut_url_first = cur_url[:(cur_url.find("%3A") + 3)]
+    cut_url_first = cut_url_first[(cut_url_first.find("&fa")):]### первая часть в адрес которая повторяется во всех серверах региона
+
     cut_url = cur_url[cur_url.find("%3A") + 3:]
     servers = cut_url.split(",")
+    servers=[f'{cut_url_first}{j}' for j in servers]###склеивает первую часть адреса с остальной
+
     print(servers)
     lst=[]###делает кортеж списков для БД
     for j,serv in enumerate(servers):
