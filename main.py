@@ -38,6 +38,8 @@ print(region)
 for i in region:
     driver.get(i)
     wait.until(EC.visibility_of_element_located((By.XPATH,'/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/div/div/button')))
+    reg=driver.find_element(By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[2]/div/div/div').text###ищет имя региона
+    reg=(reg[reg.find(": ") + 2:])###сокращает имя региона
     button2 = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/div/div/button').click()
     wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/div/div/div/aside/div[1]/div/div[2]/div/div[2]/div[13]/span')))
     button3 = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/div/div/div/aside/div[1]/div/div[2]/div/div[2]/div[13]/span').click()
@@ -54,9 +56,9 @@ for i in region:
     cut_url = cur_url[cur_url.find("%3A") + 3:]
     servers = cut_url.split(",")
     print(servers)
-    lst=[]
+    lst=[]###делает кортеж списков для БД
     for j,serv in enumerate(servers):
-        lst.append((j+1,i,servers[j]))
+        lst.append((reg+str(j+1),i,servers[j]))
     cur.executemany("INSERT INTO servers_WOW VALUES(?, ?, ?);", lst)
     conn.commit()
 
