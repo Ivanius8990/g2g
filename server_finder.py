@@ -57,17 +57,19 @@ for i in region:
     cur_url=str(driver.current_url)###получает url адрес в браузере
     print(cur_url)
     cut_url_first = cur_url[:(cur_url.find("%3A") + 3)]
-    cut_url_first = cut_url_first[(cut_url_first.find("&fa")):]### первая часть в адрес которая повторяется во всех серверах региона
+    cut_url_first = cut_url_first[(cut_url_first.find("&fa")+1):]### первая часть в адрес которая повторяется во всех серверах региона
 
     cut_url = cur_url[cur_url.find("%3A") + 3:]
     servers = cut_url.split(",")
     servers=[f'{cut_url_first}{j}' for j in servers]###склеивает первую часть адреса с остальной
 
+    i = i[i.find("region_id"):]###преобразовывает url в индекс региона
+
     print(servers)
     lst=[]###делает кортеж списков для БД
     for j,serv in enumerate(servers):
         lst.append((reg+str(j+1),server_name[j],i,servers[j]))
-    cur.executemany("INSERT or REPLACE INTO servers_WOW VALUES(?, ?, ?, ?);", lst)
+    cur.executemany("REPLACE INTO servers_WOW VALUES(?, ?, ?, ?);", lst)
     conn.commit()
 
 driver.close()
