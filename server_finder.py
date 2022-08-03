@@ -24,8 +24,6 @@ wait = WebDriverWait(driver, 10) ###все wait ждут пока загрузи
 
 ##поиск регионов
 region=[]
-servers=[]
-server_name=[]
 wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/button')))
 button = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/button').click()
 wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[3]/aside/div[1]/div/div[2]/div')))
@@ -48,6 +46,7 @@ for i in region:
     cl_button2 = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[1]/div[1]/div[5]/div[1]/div/div/div/div[1]/div[3]/div[1]/div/div[3]/div[1]/div/div/div/div/div/aside/div[1]/div/div[2]/div/div[2]')
 
     ### находим все чекбоксы, прокручиваем и щелкаем по ним. Сохраняет имена серверов
+    server_name = []
     elems2 = cl_button2.find_elements(By.CLASS_NAME,"text-body2")
     for elem in elems2:
         driver.execute_script("arguments[0].scrollIntoView();", elem)
@@ -59,6 +58,7 @@ for i in region:
     cut_url_first = cur_url[:(cur_url.find("%3A") + 3)]
     cut_url_first = cut_url_first[(cut_url_first.find("&fa")+1):]### первая часть в адрес которая повторяется во всех серверах региона
 
+    servers = []
     cut_url = cur_url[cur_url.find("%3A") + 3:]
     servers = cut_url.split(",")
     servers=[f'{cut_url_first}{j}' for j in servers]###склеивает первую часть адреса с остальной
@@ -70,7 +70,8 @@ for i in region:
     for j,serv in enumerate(servers):
         lst.append((reg+str(j+1),server_name[j],i,servers[j]))
     cur.executemany("REPLACE INTO servers_WOW VALUES(?, ?, ?, ?);", lst)
-    conn.commit()
+conn.commit()
+cur.close()
 
 driver.close()
 driver.quit()
