@@ -29,5 +29,6 @@ for row in records:
     url_list.append(url)
 cur.close()
 
+
 print(url_list)
 print(len(url_list))
