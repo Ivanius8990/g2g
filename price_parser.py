@@ -3,8 +3,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
+chrome_options = Options()
+chrome_options.add_argument("--disable-extensions")
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--headless")
+
 import sqlite3
 import concurrent.futures
+
+
+
 
 conn2 = sqlite3.connect('prices.db', check_same_thread=False)
 cur2 = conn2.cursor()
@@ -21,7 +30,7 @@ conn2.commit()
 ###url,сколько брать продавцов и id сервера. Функция добавляет данные в БД
 def prise_parsing(url,n,serv_id):
     s=Service('C:\webdriver\chromedriver.exe')
-    driver = webdriver.Chrome(service=s)
+    driver = webdriver.Chrome(options=chrome_options,service=s)
     driver.get(url)
     wait = WebDriverWait(driver, 10) ###все wait ждут пока загрузится элемент
 
@@ -66,11 +75,11 @@ def prise_parsing(url,n,serv_id):
         mid_stock=mid_stock+float(stock_list[i])
     serv_id=main_list.append(serv_id)
     main_list.append(server_name)
-    min_price = main_list.append((min(price_list)))
+    min_price = main_list.append(min(price_list))
     midl_price = main_list.append(round(mid_price / mid_stock, 6))
     midl_stock = main_list.append(int(mid_stock / n))
     sellers_amaun = main_list.append(len(prices) - 1)
-
+    print(main_list)
     cur2 = conn2.cursor()
     cur2.execute("REPLACE INTO prices_WOW VALUES(?, ?, ?, ?, ?, ?);", main_list)
     conn2.commit()
@@ -83,12 +92,11 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     futures = []
     conn = sqlite3.connect('urls.db')
     cur = conn.cursor()
-    cur.execute("""SELECT * from urls_WOW""")
-    records = cur.fetchmany(5)
+    cur.execute("""SELECT * from urls_WOW WHERE serv_id LIKE 'RU%'""")
+    records = cur.fetchall()
     for row in records:
         serv_id=row[0]
         url=row[1]
-        print(url)
         futures.append(executor.submit(prise_parsing, url, 5, serv_id))
     for future in concurrent.futures.as_completed(futures):
         print(future.result())
