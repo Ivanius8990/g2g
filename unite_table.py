@@ -45,7 +45,7 @@ for i in range(len(gg_list)):
         name=gg_list[i][0].find(fp_list[j][0])
         rassa=gg_list[i][0].find(fp_list[j][1])
         hh = []
-        if name!=-1 and rassa!=-1 and float(fp_list[j][2])>=float(gg_list[i][1])*2:
+        if name!=-1 and rassa!=-1 and float(fp_list[j][2])>=float(gg_list[i][1])*1.69:
             hh.append(fp_list[j][0]+' '+fp_list[j][1])
             hh.append(gg_list[i][0])
             hh.append(fp_list[j][2])
