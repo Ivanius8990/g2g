@@ -21,7 +21,8 @@ def name_replace(name):
 conn = sqlite3.connect('prices_funpay.db', check_same_thread=False)
 cur = conn.cursor()
 cur.execute("""CREATE TABLE IF NOT EXISTS prices_WOW_funpay(
-   serv_name TEXT PRIMARY KEY,
+   serv_name TEXT ,
+   rassa TEXT ,
    min_prise TEXT,
    midl_prise TEXT,
    midl_stock TEXT);
@@ -40,33 +41,42 @@ wait = WebDriverWait(driver, 10)  ###все wait ждут пока загруз�
 
 wait.until(EC.presence_of_element_located((By.TAG_NAME, 'option')))
 serv_name = driver.find_elements(By.TAG_NAME, 'option')
-for i in range(len(serv_name)-3):
+
+
+for i in range(len(serv_name)-4):
     serv_name[i + 1].click()
-    body = driver.find_element(By.TAG_NAME, 'body')
-    data = body.text[(body.text.find("Цена/1000")):(body.text.rfind('₽'))]
-    data_list = data.split('₽')
-    midl_prise = 0
-    midl_stock = 0
-    min_price = 0
-    price_list = []
-    min_price = []
-    for j in range(n):
-        dat = data_list[j].split('\n')
-        midl_prise = midl_prise + float(name_replace(dat[6])) * float(name_replace(dat[5]))
-        midl_stock = midl_stock + float(dat[5].replace(' ', ''))
-        min_price.append(dat[6])
-    midl_prise = round(midl_prise / midl_stock, 6)
-    midl_stock = int(midl_stock / n / 1000)
-    min_price = min(min_price)
-    price_list.append(serv_name[i + 1].text)
-    price_list.append(min_price)
-    price_list.append(midl_prise)
-    price_list.append(midl_stock)
-    cur = conn.cursor()
-    cur.execute("REPLACE INTO prices_WOW_funpay VALUES(?, ?, ?, ?);", price_list)
-    conn.commit()
-    cur.close()
-    print(price_list)
+    for z in range(-2,0):
+        serv_name[z].click()
+        if z==-2:
+            rassa='Alliance'
+        else:
+            rassa='Horde'
+        body = driver.find_element(By.TAG_NAME, 'body')
+        data = body.text[(body.text.find("Цена/1000")):(body.text.rfind('₽'))]
+        data_list = data.split('₽')
+        midl_prise = 0
+        midl_stock = 0
+        min_price = 0
+        price_list = []
+        min_price = []
+        for j in range(n):
+            dat = data_list[j].split('\n')
+            midl_prise = midl_prise + float(name_replace(dat[6])) * float(name_replace(dat[5]))
+            midl_stock = midl_stock + float(dat[5].replace(' ', ''))
+            min_price.append(dat[6])
+        midl_prise = round(midl_prise / midl_stock, 6)
+        midl_stock = int(midl_stock / n / 1000)
+        min_price = min(min_price)
+        price_list.append(serv_name[i + 1].text)
+        price_list.append(rassa)
+        price_list.append(min_price)
+        price_list.append(midl_prise)
+        price_list.append(midl_stock)
+        cur = conn.cursor()
+        cur.execute("REPLACE INTO prices_WOW_funpay VALUES(?, ?, ?, ?, ?);", price_list)
+        conn.commit()
+        cur.close()
+        print(price_list)
 
 driver.close()
 driver.quit()

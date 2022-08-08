@@ -12,11 +12,23 @@ import sqlite3
 import concurrent.futures
 
 
+url1='https://bankiros.ru/convert/eur-rub/1'### eur
+s = Service('C:\webdriver\chromedriver.exe')
+driver = webdriver.Chrome(options=chrome_options,service=s)
+driver.get(url1)
+wait = WebDriverWait(driver, 10)  ###все wait ждут пока загрузится элемент
+wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'xxx-fast-converter__out')))
+cur_rate = float(driver.find_element(By.CLASS_NAME, 'xxx-fast-converter__out').text)
+print(cur_rate)
+driver.close()
+driver.quit()
 
 
-conn2 = sqlite3.connect('prices.db', check_same_thread=False)
+
+
+conn2 = sqlite3.connect('prices_g2g.db', check_same_thread=False)
 cur2 = conn2.cursor()
-cur2.execute("""CREATE TABLE IF NOT EXISTS prices_WOW(
+cur2.execute("""CREATE TABLE IF NOT EXISTS prices_WOW_g2g(
    serv_id INT PRIMARY KEY,
    serv_name TEXT,
    min_prise TEXT,
@@ -50,7 +62,7 @@ def prise_parsing(url,n,serv_id):
     if len(prices)<n+1:
         n=len(prices)-1
     for i in range(1,n+1):
-        price_list.append(prices[i].text)
+        price_list.append(float(prices[i].text)*cur_rate)
     #print(price_list)
 
     stock_list=[]
@@ -80,7 +92,7 @@ def prise_parsing(url,n,serv_id):
     sellers_amaun = main_list.append(len(prices) - 1)
     print(main_list)
     cur2 = conn2.cursor()
-    cur2.execute("REPLACE INTO prices_WOW VALUES(?, ?, ?, ?, ?, ?);", main_list)
+    cur2.execute("REPLACE INTO prices_WOW_g2g VALUES(?, ?, ?, ?, ?, ?);", main_list)
     conn2.commit()
     cur2.close()
     driver.close()
@@ -91,7 +103,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     futures = []
     conn = sqlite3.connect('urls.db')
     cur = conn.cursor()
-    cur.execute("""SELECT * from urls_WOW WHERE serv_id LIKE 'EU%'""")
+    cur.execute("""SELECT * from urls_WOW WHERE serv_id LIKE 'RU%'""")
     records = cur.fetchall()
     for row in records:
         serv_id=row[0]
