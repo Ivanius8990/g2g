@@ -103,7 +103,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     futures = []
     conn = sqlite3.connect('urls.db')
     cur = conn.cursor()
-    cur.execute("""SELECT * from urls_WOW WHERE serv_id LIKE 'RU%'""")
+    cur.execute("""SELECT * from urls_WOW WHERE serv_id LIKE 'US%'""")
     records = cur.fetchall()
     for row in records:
         serv_id=row[0]

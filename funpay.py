@@ -20,7 +20,7 @@ def name_replace(name):
 
 conn = sqlite3.connect('prices_funpay.db', check_same_thread=False)
 cur = conn.cursor()
-cur.execute("""CREATE TABLE IF NOT EXISTS prices_WOW_funpay(
+cur.execute("""CREATE TABLE IF NOT EXISTS prices_WOW_US_funpay(
    serv_name TEXT ,
    rassa TEXT ,
    min_prise TEXT,
@@ -31,7 +31,7 @@ conn.commit()
 
 
 n=5
-url = 'https://funpay.com/chips/2/'
+url = 'https://funpay.com/chips/25/'
 
 
 s = Service('C:\webdriver\chromedriver.exe')
@@ -73,7 +73,7 @@ for i in range(len(serv_name)-4):
         price_list.append(midl_prise)
         price_list.append(midl_stock)
         cur = conn.cursor()
-        cur.execute("REPLACE INTO prices_WOW_funpay VALUES(?, ?, ?, ?, ?);", price_list)
+        cur.execute("REPLACE INTO prices_WOW_US_funpay VALUES(?, ?, ?, ?, ?);", price_list)
         conn.commit()
         cur.close()
         print(price_list)
